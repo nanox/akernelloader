@@ -1,0 +1,52 @@
+#summary One-sentence summary of this page.
+
+= How to boot with usb and akernelloade =
+Akernelloader boot usb with fat32 filesystem.<br> In the current state akernelloader lets you run a kernel on a disk or USB flash drive in a fat32 or ext2,ext3 file system.First you must develop your kernel and configure the file config_ak.h .
+
+
+*Following are the commands to usb.*
+
+==Create a new partition==
+<br>
+fdisk /dev/my_usb 1. Setup geometry:<br>
+x - extra functionality<br>
+s 63<br>
+r - return to main menu<br>
+<br>
+2. n, p, 1, enter, enter - create new partition<br>
+3. t,L,b - (FAT32)<br>
+4. a,1 - make bootable<br>
+5. p - Print<br>
+6. w - write the table to disk<br>
+
+==Format==
+
+losetup -d /dev/loop0<br>
+*// comment : look Ofsset like 63 sectors x 512*<br>
+losetup /dev/loop0 /dev/my_usb -o 32256<br>
+mkdosfs -F32 /dev/loop0<br>
+mount -t vfat /dev/loop0 my_dir<br>
+cp kernel my_dir/kernel<br>
+umount /dev/loop0<br>
+losetup -d /dev/loop0<br>
+
+
+==Edit akel.conf==
+<br>
+In the first time you must create a file akel.conf and put inside the<br> folder boot. To edit the akel.conf you should put the following lines.
+<br>
+Line with the kernel Location<br>
+
+kernel /boot/my_kernel<br>
+
+And if you have a file type ram disk place the following line<br>
+
+initrd /boot/my_initrd<br>
+
+==Install Akernelloader==
+<br>
+./akel -bs bootstrap /dev/my_usb<br>
+./akel -ak akernelloader.bin /dev/my_usb<br> 
+
+
+

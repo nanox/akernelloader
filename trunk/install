@@ -114,7 +114,10 @@ Akernelloader boot usb with fat32 filesystem.
 Following are the commands to usb. 
 
 Create a new partition
- fdisk /dev/my_usb 1. Setup geometry:
+
+ fdisk /dev/my_usb 
+ 
+ 1. Setup geometry:
  x - extra functionality
  s 63
  r - return to main menu
@@ -125,8 +128,9 @@ Create a new partition
  5. p - Print
  6. w - write the table to disk
  
-Formatlosetup -d /dev/loop0
+Format
 
+losetup -d /dev/loop0
  // comment : the first sector of the partition is 63 and the offset is equal 63 x 512
  losetup /dev/loop0 /dev/my_usb -o 32256
  mkdosfs -F32 /dev/loop0

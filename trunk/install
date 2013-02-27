@@ -105,9 +105,14 @@ losetup -d /dev/loop0
 losetup /dev/loop0  disk_504M.img
 
 -----------------------------------------------------------------------------------
-How to boot with usb and akernelloadeAkernelloader boot usb with fat32 filesystem.
-  In the current state akernelloader lets you run a kernel on a disk or  USB flash drive in a fat32 or ext2,ext3 file system.First you must  develop your kernel and configure the file config_ak.h . 
+How to boot with usb and akernelloade
+Akernelloader boot usb with fat32 filesystem.
+  In the current state akernelloader lets you run a kernel on a disk or  
+  USB flash drive in a fat32 or ext2,ext3 file system.
+  First you must  develop your kernel and configure the file config_ak.h .
+  
 Following are the commands to usb. 
+
 Create a new partition
  fdisk /dev/my_usb 1. Setup geometry:
  x - extra functionality
@@ -121,6 +126,7 @@ Create a new partition
  6. w - write the table to disk
  
 Formatlosetup -d /dev/loop0
+
  // comment : the first sector of the partition is 63 and the offset is equal 63 x 512
  losetup /dev/loop0 /dev/my_usb -o 32256
  mkdosfs -F32 /dev/loop0
@@ -132,6 +138,7 @@ Formatlosetup -d /dev/loop0
  losetup -d /dev/loop0
  
 Edit akel.conf
+
  In the first time you must create a file akel.conf and put inside the
  folder boot. To edit the akel.conf you should put the following lines. 
  Line with the kernel Location
@@ -143,6 +150,7 @@ And if you have a file type ram disk place the following line
 initrd /boot/my_initrd
  
 Install Akernelloader
+
  ./akel -bs bootstrap /dev/my_usb
  ./akel -ak akernelloader.bin /dev/my_usb
 

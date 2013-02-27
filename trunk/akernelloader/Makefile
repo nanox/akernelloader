@@ -43,7 +43,7 @@ OBJECTS = akernelloader.o gdt_ak.o abios_ak.o bios_ak.o start_kernel_ak.o	\
 all:akernelloader.bin smake move
 
 akernelloader.bin: $(OBJECTS) 
-	@echo "akernelloader compile the program lbloader  .. "
+	@echo "akernelloader compile the program akernelloader.bin ... "
 	@ $(LD) $(OBJECTS)  -o $(EXEC) -T $(LD_FILE)  
 	@ $(OBJCOPY) $(OBJ_FLAGS) $(EXEC) $@
 	

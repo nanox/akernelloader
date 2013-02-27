@@ -26,7 +26,9 @@ losetup -d /dev/loop0<br>
 losetup /dev/loop0 /dev/my_usb -o 32256<br>
 mkdosfs -F32 /dev/loop0<br>
 mount -t vfat /dev/loop0 my_dir<br>
-cp kernel my_dir/kernel<br>
+cd my_dir<br>
+mkdir boot<br>
+cp kernel my_dir/boot/my_kernel<br>
 umount /dev/loop0<br>
 losetup -d /dev/loop0<br>
 
@@ -47,4 +49,3 @@ initrd /boot/my_initrd<br>
 <br>
 ./akel -bs bootstrap /dev/my_usb<br>
 ./akel -ak akernelloader.bin /dev/my_usb<br> 
-

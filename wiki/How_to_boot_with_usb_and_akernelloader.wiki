@@ -22,7 +22,7 @@ r - return to main menu<br>
 ==Format==
 
 losetup -d /dev/loop0<br>
-*// comment : look Ofsset like 63 sectors x 512*<br>
+*// comment : the first sector of the partition is 63 and the offset is equal 63 x 512*<br>
 losetup /dev/loop0 /dev/my_usb -o 32256<br>
 mkdosfs -F32 /dev/loop0<br>
 mount -t vfat /dev/loop0 my_dir<br>
@@ -47,6 +47,4 @@ initrd /boot/my_initrd<br>
 <br>
 ./akel -bs bootstrap /dev/my_usb<br>
 ./akel -ak akernelloader.bin /dev/my_usb<br> 
-
-
 

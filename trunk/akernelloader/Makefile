@@ -64,7 +64,7 @@ clean:
 	@cd ./fat_ak && $(MAKE) clean
 	@cd ./ext2_ak && $(MAKE) clean
 	@rm -f *.elf *.o  *.bin *.BIN *~ 
-	@echo "DIR lbloader_ak is clean .. "
+	@echo "DIR akernelloader is clean .. "
 
 
 

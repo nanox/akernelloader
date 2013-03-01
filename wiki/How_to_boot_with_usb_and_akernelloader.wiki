@@ -8,7 +8,10 @@ Akernelloader boot usb with fat32 filesystem.<br> In the current state akernello
 
 ==Create a new partition==
 <br>
-fdisk /dev/my_usb 1. Setup geometry:<br>
+
+fdisk /dev/my_usb <br>
+
+1. Setup geometry:<br>
 x - extra functionality<br>
 s 63<br>
 r - return to main menu<br>

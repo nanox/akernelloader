@@ -193,7 +193,7 @@ int load_linux(__u32 kernel_size,const char * kernel_path){
 
            fd = fopen_ak(kernel_path); 
            fseek_ak(fd, setup_size,SEEK_SET);
-           bread = fs_op_ak.read((void*)linux_start_addr , kernel_size , 1, fd );  
+           bread = fread_ak((void*)linux_start_addr , kernel_size , 1, fd );  
            printf_ak ("Kernel bytes read %i \n",bread );
          
     

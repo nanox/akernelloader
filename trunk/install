@@ -105,8 +105,8 @@ losetup -d /dev/loop0
 losetup /dev/loop0  disk_504M.img
 
 -----------------------------------------------------------------------------------
-How to boot with usb and akernelloade
-Akernelloader boot usb with fat32 filesystem.
+How to boot from usb with akernelloader
+  Akernelloader boot from usb with fat32 filesystem.
   In the current state akernelloader lets you run a kernel on a disk or  
   USB flash drive in a fat32 or ext2,ext3 file system.
   First you must  develop your kernel and configure the file config_ak.h .

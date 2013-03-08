@@ -42,7 +42,7 @@ printf_ak("Find a bootable partition ...\n");
 if(open_partition()){     
      printf_ak("Partition type id: %x  \n", partition.type );
      printf_ak("Partition start  : %lu \n", partition.start);
-     printf_ak("Partition length : %lu \n", partition.length );}
+     printf_ak("Number of sectors in partition : %lu \n", partition.length );}
 else{
       printf_ak("Bad file system or boot blag is not set\n");
       getkey_ak();

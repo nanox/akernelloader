@@ -185,7 +185,7 @@ int load_linux(__u32 kernel_size,const char * kernel_path){
           
           printf_ak ("Setup size in bytes    %i \n",setup_size); 
           printf_ak ("Kernel size in bytes   %i \n",kernel_size);
-        
+          printf_ak ("Load kernel please wait ...\n");
 
              bread = fread_ak((void*)linux_base_ptr , setup_size , 1, fd );  
              printf_ak ("Setup bytes read %i \n",bread );

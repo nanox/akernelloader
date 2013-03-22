@@ -87,7 +87,7 @@ get_parameters (driver_bios, &parameters);
  if(start_kernel_ak(addr, kernel_path )){
    load_initrd (initrd_path);
    printf_ak("Starting Linux kernel\n"
-             "Pleas wait ...\n");
+             "Please wait ...\n");
    boot_linux_ak();
  }
 

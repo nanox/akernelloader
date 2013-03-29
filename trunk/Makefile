@@ -45,7 +45,7 @@ akel:ak_boot-inst.c
 	@ $(CC) ak_boot-inst.c -o $@
 	
 smake:
-	@cd ./akernelloader && $(MAKE)   #Sub make lbloader
+	@cd ./akernelloader && $(MAKE)   #Sub make akernelloader
 	
 
 

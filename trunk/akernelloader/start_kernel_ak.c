@@ -116,7 +116,9 @@ struct linux_kernel_header *linux_h;
             load_linux( kernel_size, kernel_path);
             return 1;
             }
-
+          fd = fopen_ak(kernel_path);
+          fread_ak((void*)kernel_address , kernel_size , 1, fd);
+           
            if(IS_ELF(kernel_address)){
            printf_ak("\nIS ELF ...\nStarting kernel ...\n"); 
            load_elf(kernel_address,&entry);

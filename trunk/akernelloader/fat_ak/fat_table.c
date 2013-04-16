@@ -45,7 +45,8 @@ uint32 fatfs_find_next_cluster(struct fatfs *fs, uint32 current_cluster)
           return (FAT32_LAST_CLUSTER);
 
         // Find 32 bit entry of current sector relating to cluster number 
-        position = (current_cluster - (FAT_sector_offset * 128)) * 4; 
+        // 128 entry per sector
+        position = (current_cluster % 128) * 4; 
 
         // Read Next Clusters value from Sector Buffer
         nextcluster = FAT32_GET_32BIT_WORD((uint16)position);    

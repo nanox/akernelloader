@@ -16,6 +16,7 @@ fdisk /dev/my_usb <br>
 1. Setup geometry:<br>
 x - extra functionality<br>
 s 63<br>
+b,1,63<br>
 r - return to main menu<br>
 <br>
 2. n, p, 1, enter, enter - create new partition<br>

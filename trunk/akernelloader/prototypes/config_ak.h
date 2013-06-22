@@ -21,7 +21,7 @@
 #define _CONFIG_AK_H__
 
 #define config_path "/boot/akel.conf" 
-#define kernel_address     0x200000
+#define kernel_address     0x100000
 
 char kernel_path[255]; 
 char initrd_path[256];

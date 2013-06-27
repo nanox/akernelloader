@@ -51,6 +51,10 @@ And if you have a file type ram disk place the following line<br>
 
 initrd /boot/my_initrd<br>
 
+Or:<br>
+
+module /boot/my_module<br>
+
 ==Install Akernelloader==
 <br>
 ./akel -bs bootstrap /dev/my_usb<br>

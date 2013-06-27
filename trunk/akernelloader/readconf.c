@@ -23,6 +23,7 @@
 #include <stdio_ak.h>
 #include <string_ak.h>
 #include <config_ak.h>
+#include <multiboot_ak.h>
 
  int offset;
  int left;
@@ -94,12 +95,15 @@ char *find_command (char *command)
 
   *ptr = 0;
       if(!strcmp_akel (command,"kernel")){
-	  return "kernel";
+      return "kernel";
 
-	}
+    }
        else if(!strcmp_akel (command,"initrd")){  
-	  return "initrd";
-	}
+      return "initrd";
+    }
+       else if(!strcmp_akel (command,"module")){  
+      return "module";
+    }
       
   return 0;
 
@@ -113,6 +117,8 @@ int read_fconfig(const char* conf_path){
  char *arg;
 
  FILE *fd;
+ int module_count = 0;
+
  fd = fopen_ak(conf_path);
  if(fd == NULL){
       printf_ak("Not open the configuration file .. \n");
@@ -132,6 +138,12 @@ int read_fconfig(const char* conf_path){
   if (ptr == "initrd"){
     strend_null(arg);
     strcpy_akel (initrd_path, arg );  
+    }
+
+   if (ptr == "module"){
+    strend_null(arg);
+    strcpy_akel (module_path[module_count], arg );  
+    module_count++;
     }
  }
 

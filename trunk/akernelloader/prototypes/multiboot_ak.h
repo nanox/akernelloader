@@ -93,7 +93,7 @@
      /* Is there video information? */
      #define MULTIBOOT_INFO_VIDEO_INFO               0x00000800
         
-     
+     #define MULTIBOOT_MODULE_NUM                    99
      struct multiboot_header
      {
        /* Must be MULTIBOOT_MAGIC - see above. */
@@ -219,6 +219,8 @@
 struct multiboot_info mbinfo;
 
 unsigned char boot_header[MULTIBOOT_SEARCH];
-     
-     #endif /* END _MULTIBOOT_AK_H */
+char module_path[MULTIBOOT_MODULE_NUM][1000];
+    
+#endif /* END _MULTIBOOT_AK_H */
+
 

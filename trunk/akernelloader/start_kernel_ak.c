@@ -148,10 +148,10 @@ struct linux_kernel_header *linux_h;
         for(i=0;i < MULTIBOOT_MODULE_NUM;i++){
               if( strlen_akel (module_path[i]) == 0)
                   break;
-              if(i == 0){
+              if(i == 0)
                 mod_cur_addr = entry + kernel_size ;
-                mb_load_module (module_path[i]);
-               }
+ 
+              
 
                mb_load_module (module_path[i]);
 

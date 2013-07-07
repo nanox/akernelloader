@@ -59,3 +59,7 @@ module /boot/my_module<br>
 <br>
 ./akel -bs bootstrap /dev/my_usb<br>
 ./akel -ak akernelloader.bin /dev/my_usb<br> 
+
+==Advice for compilation and utilization==
+
+If the akernelloader block during the execution try with a newer version of the compiler or package gnu binutils. Can also happen that the bootloader is correctly recorded in the usb if it does disconnect and reconnect.

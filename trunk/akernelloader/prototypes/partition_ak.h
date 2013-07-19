@@ -26,6 +26,7 @@
 #define PARTITION_PRIM_MAX  4   /* Primary partitions max. entry  */
 #define PARTITION_EXTD_MAX  32  /* Max. extended partitions */
 
+#define PARTITION_FAT32_LBA    0xc
 #define PARTITION_FAT32        0xb
 #define PARTITION_EXT2        0x83
 

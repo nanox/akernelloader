@@ -27,7 +27,7 @@
 
 int init_file_op(int fs_type){
 
-if( fs_type == PARTITION_FAT32 ){
+if( fs_type == PARTITION_FAT32 || PARTITION_FAT32_LBA ){
 
         fat_init();
 

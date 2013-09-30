@@ -118,7 +118,8 @@ load_disk:
         1023 * 255 * 63 == Max. CX 
 
 */
-      
+
+ /* make sure that not use LBA */
   cmp  $0xFF,%dh     /*255 ?*/
   jne  read_disk
 ECHS:

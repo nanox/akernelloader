@@ -93,7 +93,7 @@ disk_addr_chs:
   movw    %bx,%cx      # Track 
   movw    %bx,%dx      # Set zero
   movb    $0x02,%cl    # Sector 
-  movw    $0x2018,%ax  # Bios function to read and (AL) read 18 sectors
+  movw    $0x0218,%ax  # Bios function to read and (AL) read 18 sectors
   ret
     
 load_disk:

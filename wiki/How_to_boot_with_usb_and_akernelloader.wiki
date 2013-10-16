@@ -30,7 +30,7 @@ r - return to main menu<br>
 losetup -d /dev/loop0<br>
 *// comment : the first sector of the partition is 63 and the offset is equal 63 x 512*<br>
 losetup /dev/loop0 /dev/my_usb -o 32256<br>
-*// comment : for new version of fdisk first sector of the partition is 2048 and the offset is equal 2048 x 512<br>
+*// comment : for new version of fdisk first sector of the partition is 2048 and the offset is equal 2048 x 512*<br>
 losetup /dev/loop0 /dev/my_usb -o 1048576<br>
 
 mkdosfs -F32 /dev/loop0<br>

@@ -71,7 +71,7 @@ int CheckEBR(__u32 ebr_lba)
 {
     EXTENDED_BOOT_RECORD ebr;
     uint64 offset ,next_erb_lba = 0;
-    int i = 0;
+    int i = PARTITION_PRIM_MAX;
      
 
    

@@ -47,15 +47,24 @@ In the first time you must create a file akel.conf and put inside the<br> folder
 <br>
 Line with the kernel Location<br>
 
-kernel /boot/my_kernel<br>
+kernel = /boot/my_kernel<br>
 
 And if you have a file type ram disk place the following line<br>
 
-initrd /boot/my_initrd<br>
+initrd = /boot/my_initrd<br>
 
 Or:<br>
 
-module /boot/my_module<br>
+module = /boot/my_module<br>
+
+the disk and partitions start at zero in 
+the akernelloader extended partitions start at 4
+         
+      disk number
+          |
+root = (hd0, 0 )
+             |
+     partition number
 
 ==Install Akernelloader==
 <br>

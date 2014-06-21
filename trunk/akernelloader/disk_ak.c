@@ -75,7 +75,7 @@ int CheckEBR(__u32 ebr_lba)
      
 
    
-    for(i ; i < partition_find && next_erb_lba > 0 ; i++ ){    
+    for(i ; i  <= partition_find && next_erb_lba > 0 ; i++ ){    
           offset= (uint64) (ebr_lba + next_erb_lba) ;
         // Read and validate the extended boot record
          if(media_read_ak(offset ,&ebr, 512) == 0 )

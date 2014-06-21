@@ -65,15 +65,6 @@ fdisk disk_504M.img
    5. p     - Print
    6. w     - write the table to disk
 
-_____________________________________________________________
-	
-			USE QEMU
-	On your console type : 
-
-       losetup 	  /dev/loop0	disk_504M.img 
-       fdisk 	  /dev/loop0
-       qemu -hda  /dev/loop0
-
 -------------------------------------------------------------
 
 To install use :
@@ -127,7 +118,8 @@ Create a new partition
  4. a,1 - make bootable
  5. p - Print
  6. w - write the table to disk
- 
+
+------------------------------------------------------------------
 Format
 
 losetup -d /dev/loop0
@@ -141,21 +133,41 @@ losetup -d /dev/loop0
  umount /dev/loop0
  losetup -d /dev/loop0
  
+------------------------------------------------------------------------
 Edit akel.conf
 
  In the first time you must create a file akel.conf and put inside the
  folder boot. To edit the akel.conf you should put the following lines. 
  Line with the kernel Location
  
-kernel /boot/my_kernel
+kernel = /boot/my_kernel
  
 And if you have a file type ram disk place the following line
  
-initrd /boot/my_initrd
+initrd = /boot/my_initrd
+
+the disk and partitions start at zero in 
+the akernelloader extended partitions start at 4
+         
+      disk number
+          |
+root = (hd0, 0 )
+             |
+     partition number
  
 Install Akernelloader
 
  ./akel -bs bootstrap /dev/my_usb
  ./akel -ak akernelloader.bin /dev/my_usb
+
+
+------------------------------------------------------------------
+	
+			USE QEMU
+	On your console type : 
+
+       losetup 	  /dev/loop0	disk_504M.img 
+       qemu -hda  /dev/loop0
+
 
 

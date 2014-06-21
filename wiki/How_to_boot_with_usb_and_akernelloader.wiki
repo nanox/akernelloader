@@ -57,8 +57,8 @@ Or:<br>
 
 module = /boot/my_module<br>
 
-the disk and partitions start at zero in 
-the akernelloader extended partitions start at 4
+the disk and partitions start at zero in <br>
+the akernelloader extended partitions start at 4<br>
          
 root = (hd0, 0 )
        

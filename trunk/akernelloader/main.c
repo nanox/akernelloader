@@ -82,6 +82,12 @@ get_parameters (driver_bios, &parameters);
   //Read the configuration file 
   read_fconfig(config_path);
 
+printf_ak("Set device ...\n");
+     set_device_ak (device_str);
+
+/*Uses new device configuration*/
+ open_partition();
+ init_file_op(partition.type);     
 
     //Find the kernel header
  if(start_kernel_ak(addr, kernel_path )){
@@ -94,5 +100,7 @@ get_parameters (driver_bios, &parameters);
  getkey_ak();
 
 }
+
+
 
 

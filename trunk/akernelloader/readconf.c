@@ -24,15 +24,16 @@
 #include <string_ak.h>
 #include <config_ak.h>
 #include <multiboot_ak.h>
+#include <menu.h>
 
  int offset;
  int left;
 
 
-int takeone(FILE * f);
-int getaline(FILE * f , char * out, int size);
+char takeone(FILE * f);
+int getaline(FILE * f , char * cmdline, int size);
 
-int takeone(FILE * f) {
+char takeone(FILE * f) {
 unsigned char textbuf[4096];
 
  if ((left - offset)<=0) {
@@ -49,17 +50,69 @@ unsigned char textbuf[4096];
 
  return textbuf[offset++];
 }
-int getaline(FILE * f , char * out, int size) {
- int c;
+int getaline(FILE * f , char * cmdline, int size) {
+ 
+ int pos = 0, literal = 0, comment = 0;
+ char c;  /* since we're loading it a byte at a time! */
+  
  c = takeone(f);
  if (c < 0) return 0;
- while (c >=0 && size > 1) {
-  *out++ = c;
-  --size;
-  if (c == '\n') break;
-  c = takeone(f);
- }
- *out='\0';
+ while (c >=0 && size > 1)
+    {
+          c = takeone(f);
+
+      /* Skip all carriage returns.  */
+      if (c == '\r')
+	continue;
+
+      /* Replace tabs with spaces.  */
+      if (c == '\t')
+	c = ' ';
+
+      /* The previous is a backslash, then...  */
+      if (literal)
+	{
+	  /* If it is a newline, replace it with a space and continue.  */
+	  if (c == '\n')
+	    {
+	      c = ' ';
+	      
+	      /* Go back to overwrite a backslash.  */
+	      if (pos > 0)
+		pos--;
+	    }
+	    
+	  literal = 0;
+	}
+	  
+      /* translate characters first! */
+      if (c == '\\' && ! literal)
+	literal = 1;
+
+      if (comment)
+	{
+	  if (c == '\n')
+	    comment = 0;
+	}
+      else if (! pos)
+	{
+	  if (c == '#')
+	    comment = 1;
+	  else if ((c != ' ') && (c != '\n'))
+	    cmdline[pos++] = c;
+	}
+      else
+	{
+	  if (c == '\n')
+	    break;
+
+	    cmdline[pos++] = c;
+            size--;
+	}
+    }
+
+  cmdline[pos] = 0;
+
  return 1;
 }
 

@@ -32,7 +32,7 @@ init_menu_page (void)
 {
   cls_ak();
 
-  printf_ak ("\n  Akernelloder version 0.0.1\n\n");
+  printf_ak ("\n  Akernelloader version 0.0.1\n\n");
 }
 
 

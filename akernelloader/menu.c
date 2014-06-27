@@ -132,6 +132,11 @@ int run_menu_akernelloder(){
    setcursor_ak (0);
 
    print_entries_ak(3, 12, 0, 0, menu_entries);
+   gotoxy_ak(3,20);
+   printf_ak ("Use the %c and %c keys to select which entry is highlighted\n" 
+            , DISP_UP, DISP_DOWN);
+   gotoxy_ak(3,21);
+   printf_ak ("and press enter to boot the selected OS\n");
 
  while(1){
 

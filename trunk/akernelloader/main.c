@@ -86,7 +86,7 @@ get_parameters (driver_bios, &parameters);
    run_menu_akernelloder();
 
 
-printf_ak("Set device ...(%s)\n",device_str);
+printf_ak("Set device ... %s\n",device_str);
      set_device_ak (device_str);
 
 /*Uses new device configuration*/

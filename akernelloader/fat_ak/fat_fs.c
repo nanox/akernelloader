@@ -158,14 +158,14 @@ if(file->f_pos < _fs.cluster_size )
   int plus = _fs.cluster_size - offset ;
 
  uint32 remainder = nbyte % _fs.cluster_size ;
-        remainder -= offset; 
+      
  
 
 
   Cluster = file->startcluster;
 
         // Advance until we are at the correct location
-    while ((clustercount++ < file->f_pos / _fs.cluster_size) && (Cluster!= 0x0ffffff))
+    while ((clustercount++ < (file->f_pos / _fs.cluster_size) ))
          Cluster = fatfs_find_next_cluster(&_fs,Cluster);
         
    
@@ -181,6 +181,7 @@ if(file->f_pos < _fs.cluster_size )
           if(remainder){
 
               if (first && file->f_pos){
+
         media_read_ak(lba, block , _fs.cluster_size);
                
                 memmove_akel (buffer, block + offset, remainder); 
@@ -188,7 +189,7 @@ if(file->f_pos < _fs.cluster_size )
                 bytesRead += remainder ; 
                 first = 0;
                 } else {
-                
+          
                  media_read_ak(lba, buffer, remainder );
                  bytesRead += remainder ;
                 }
@@ -200,9 +201,10 @@ if(file->f_pos < _fs.cluster_size )
 
        
              if (first && file->f_pos){
+
         media_read_ak(lba, block , _fs.cluster_size);
                
-                memmove_akel (buffer, block + plus, plus); 
+                memmove_akel (buffer, block + offset, plus); 
                 buffer += plus ;
                 bytesRead += plus ;
                 first = 0;
@@ -230,5 +232,6 @@ void fat_fclose( void *f )
         file->parentcluster = 0;
      
 }
+
 
 

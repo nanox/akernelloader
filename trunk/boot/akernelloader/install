@@ -1,0 +1,180 @@
+__________________________________________________________________________
+ 
+				BOCHS
+Install Bochs, and :  
+ 
+Copy the file /ak_source/bochsrc in your /home/dir and rename to .bochsrc
+
+In the DIR/ak_source  run the command bximage for bochs .
+e.g :
+    bximage 
+    
+And now:
+
+========================================================================
+                                bximage
+                  Disk Image Creation Tool for Bochs
+========================================================================
+
+Do you want to create a floppy disk image or a hard disk image?
+Please type hd or fd. [hd] hd   <-------------------------------   HERE 
+
+What kind of image should I create?
+Please type flat, sparse or growing. [flat] flat
+
+Enter the hard disk size in megabytes, between 1 and 129023
+[10] 8192 <----------------------------------------------------    HERE
+
+I will create a 'flat' hard disk image with
+  cyl=16644
+  heads=16
+  sectors per track=63
+  total sectors=16777152
+  total size=8191.97 megabytes
+
+What should I name the image?
+[c.img] disk_504M.img <----------------------------------------  AND HERE
+
+Writing: [] Done.
+
+I wrote 8589901824 bytes to disk_504M.img.
+
+The following line should appear in your bochsrc:
+  ata0-master: type=disk, path="disk_504M.img", mode=flat, cylinders=16644, heads=16, spt=63
+
+
+
+_____________________________________________________________
+
+				FDISK
+
+Now run the fdisk to create a new partition .
+
+
+fdisk disk_504M.img
+
+   1. Setup geometry:
+          * x - extra functionality
+          * h 255
+          * s 63
+          * c 1023
+          * r - return to main menu 
+   2. n, p, 1, enter, enter - create new partition
+   3. t,L,b -  (FAT32)
+   4. a,1   - make bootable (optional?)
+   5. p     - Print
+   6. w     - write the table to disk
+
+-------------------------------------------------------------
+
+To install use :
+      akel --help
+or 
+      akel ?
+or
+      akel -h
+      
+      
+And run bochs or qemu  ...
+
+Please post your changes ..
+
+---------------------------------------------------------------
+                    FORMAT
+              
+Basic commands :
+
+losetup -d /dev/loop0
+
+/* Ofsset == 63 sectors * 512 */
+losetup /dev/loop0  disk_504M.img -o 32256
+mkdosfs -F32 /dev/loop0
+mount -t vfat /dev/loop0  my_dir
+cp kernel my_dir/kernel
+umount /dev/loop0
+losetup -d /dev/loop0
+losetup /dev/loop0  disk_504M.img
+
+-----------------------------------------------------------------------------------
+How to boot from usb with akernelloader
+  Akernelloader boot from usb with fat32 filesystem.
+  In the current state akernelloader lets you run a kernel on a disk or  
+  USB flash drive in a fat32 or ext2,ext3 file system.
+  First you must  develop your kernel and configure the file config_ak.h .
+  
+Following are the commands to usb. 
+
+Create a new partition
+
+ fdisk /dev/my_usb 
+ 
+ 1. Setup geometry:
+ x - extra functionality
+ s 63
+ r - return to main menu
+ 
+ 2. n, p, 1, enter, enter - create new partition
+ 3. t,L,b - (FAT32)
+ 4. a,1 - make bootable
+ 5. p - Print
+ 6. w - write the table to disk
+
+------------------------------------------------------------------
+Format
+
+losetup -d /dev/loop0
+ // comment : the first sector of the partition is 2048 and the offset is equal 2048 x 512
+ losetup /dev/loop0 /dev/my_usb -o 1048576
+ mkdosfs -F32 /dev/loop0
+ mount -t vfat /dev/loop0 my_dir
+ cd my_dir
+ mkdir boot
+ cp kernel my_dir/boot/my_kernel
+ umount /dev/loop0
+ losetup -d /dev/loop0
+ 
+------------------------------------------------------------------------
+Edit akel.conf
+
+ In the first time you must create a file akel.conf and put inside the
+ folder boot. To edit the akel.conf you should put the following lines.
+
+Start with the title then press enter
+
+title = My os
+ 
+Line with the kernel Location
+ 
+kernel = /boot/my_kernel
+ 
+And if you have a file type ram disk place the following line
+ 
+initrd = /boot/my_initrd
+
+the disk and partitions start at zero in 
+the akernelloader extended partitions start at 4
+do not forget to mark as bootable with fdisk partition root that is 
+inside the extended partition
+         
+      disk number
+          |
+root = (hd0, 0 )
+             |
+     partition number
+ 
+Install Akernelloader
+
+ ./akel -bs bootstrap /dev/my_usb
+ ./akel -ak akernelloader.bin /dev/my_usb
+
+
+------------------------------------------------------------------
+	
+			USE QEMU
+	On your console type : 
+
+       losetup 	  /dev/loop0	disk_504M.img 
+       qemu -hda  /dev/loop0
+
+
+

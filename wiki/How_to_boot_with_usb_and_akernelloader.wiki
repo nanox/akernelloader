@@ -2,9 +2,10 @@ Xo#summary One-sentence summary of this page.
 
 = How to boot from usb with akernelloader =
 Akernelloader boot from usb with fat32 filesystem.<br> In the current state akernelloader lets you run a kernel on a disk or USB flash drive in a fat32 or ext2,ext3 file system.First you must develop your kernel and configure the file config_ak.h .<br>
+If you do not have a kernel to test akernelloader you can use the kernel <a href="http://code.google.com/p/desiros-kernel/">Desiros</a> is another of my projects that you can collaborate.
 
-
-
+*Virtual disk*<br>
+If you do not want to test the usb you can create a virtual disk. <br>If you are using Desiros create a virtual disk and format ext2 and copy the userland programs folder in your virtual disk.<br><br>
 
 *Following are the commands to usb.*
 
